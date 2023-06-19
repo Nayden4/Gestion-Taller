@@ -9,7 +9,6 @@
 <body>
   <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
 
-    <div class="">
     <div class="row">
       <div class="col-12 text-center ">
         <h1 class="text-white">Taller Flash</h1>
@@ -39,7 +38,7 @@
 
       <div class="col-4">
 
-        <button class="btn btn-info btn-lg">
+        <button class="btn btn-info btn-lg" [routerLink]="['vehiculos-lista']" routerLinkActive="active">
           Vehiculos
           <br>
           <img src="../assets/img/coche.png" style="width:25px;">
@@ -48,6 +47,32 @@
       </div>
 
     </div>
+
+    <div class="row">
+      <div class="col-12 tabla">
+        <h2>Proximas ITV</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Matricula</th>
+              <th>Vehiculo</th>
+              <th>Cliente</th>
+              <th>Telefono</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr class="text-white " *ngFor="let vehiculo of vehiculos ">
+              <td>{{vehiculo.proximaItv}}</td>
+              <td>{{vehiculo.matricula}}</td>
+              <td>{{vehiculo.marca}} {{vehiculo.modelo}}</td>
+              <td>{{vehiculo.cliente.nombre}} {{vehiculo.cliente.apellidos}}</td>
+              <td>{{vehiculo.cliente.telefono}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div>

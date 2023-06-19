@@ -1,0 +1,65 @@
+<body>
+    <div class="container">
+        <div class="panel-heading text-center">
+            <h1>Vehiculos</h1>
+        </div>
+
+        <!-- caixa de filtrat -->
+
+        <div class="row section text-center">
+            <div class="col-md-6">
+                <label>Buscar:</label>
+                <input type="text" placeholder="Nombre, Apellidos, NIF" [(ngModel)]="listFilter">
+            </div>
+            <div class="col-md-6">
+                <button [routerLink]="['../vehiculos-crear/']" class="btn btn-crear btn-success">Nuevo vehiculo</button>
+                <button [routerLink]="['']" class="btn btn-crear btn-danger">Volver</button>
+            </div>
+        </div>
+        <!-- fi caixa filtrat -->
+
+
+        <div *ngIf="vehiculos.length==0">
+            <h4>No hay vehiculos</h4>
+        </div>
+        <div *ngIf="vehiculos.length>0" class="table-responsive tabla">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Matricula</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Km</th>
+                        <th>CV</th>
+                        <th>Proxima ITV</th>
+                        <th>Cliente</th>
+                        <th></th>
+                        <th></th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let vehiculo of vehiculos | vehiculosListFilter:listFilter | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage}">
+                        <td>{{vehiculo.matricula}}</td>
+                        <td>{{vehiculo.marca}}</td>
+                        <td>{{vehiculo.modelo}}</td>
+                        <td>{{vehiculo.km}}</td>
+                        <td>{{vehiculo.cv}}</td>
+                        <td>{{vehiculo.proximaItv}}</td>
+                        <td>{{vehiculo.cliente.nombre}} {{vehiculo.cliente.apellidos}}</td>
+
+
+                        <td><a [routerLink]="['../vehiculos-editar/'+vehiculo.id]">Editar</a></td>
+                        <td><a href="" (click)="eliminarVehiculo(vehiculo.id)">Eliminar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls previousLabel="Anterior" nextLabel="Siguiente"
+                (pageChange)="currentPage = $event"></pagination-controls>
+
+
+        </div>
+    </div>
+</body>

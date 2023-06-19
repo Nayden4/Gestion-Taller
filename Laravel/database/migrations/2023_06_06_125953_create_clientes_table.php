@@ -16,15 +16,15 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('nombre');
-            $table->string('apellidos');
-            $table->string('nif');
-            $table->string('calle');
-            $table->integer('numero');
-            $table->integer('cp');
-            $table->string('ciudad');
-            $table->string('telefono');
-            $table->string('email')->unique();
-            $table->integer('particularEmpresa');
+            $table->string('apellidos')->nullable();
+            $table->string('nif')->nullable();
+            $table->string('calle')->nullable();
+            $table->integer('numero')->nullable();
+            $table->integer('cp')->nullable();
+            $table->string('ciudad')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->integer('particularEmpresa')->nullable();
 
         });
     }

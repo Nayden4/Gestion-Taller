@@ -17,9 +17,10 @@ return new class extends Migration
 
             $table->string('matricula');
             $table->string('marca');
-            $table->string('modelo');
-            $table->string('km');
-            $table->date('proximaItv');
+            $table->string('modelo')->nullable();
+            $table->string('km')->nullable();
+            $table->string('cv')->nullable();
+            $table->date('proximaItv')->nullable();
 
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes');

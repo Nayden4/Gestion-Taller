@@ -8,6 +8,7 @@ import { ICliente } from '../interfaces/ICliente';
   styleUrls: ['./clientes-lista.component.css']
 })
 export class ClientesListaComponent {
+  router: any;
   constructor(private clientesService: ClientesService) { }
   clientes: ICliente[] = [];
   listFilter: string = '';
@@ -22,6 +23,25 @@ export class ClientesListaComponent {
     this.clientesService.getClientes().subscribe(resp => {
       if (resp.body) this.clientes = resp.body.reverse();
     });
+  }
+
+  confirmarEliminacion(): boolean {
+    return confirm("¿Está seguro de que desea eliminar este cliente?");
+  }
+
+  eliminarCliente(id: any) {
+    if (this.confirmarEliminacion()) {
+      this.clientesService.deleteCliente(id)
+        .subscribe(
+          response => {
+            console.log(response);
+            this.ngOnInit();
+          },
+          error => {
+            console.log(error);
+          });
+    }
+    this.router.navigate(['clientes-lista']);
   }
 
 

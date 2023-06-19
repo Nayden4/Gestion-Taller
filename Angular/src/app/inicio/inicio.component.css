@@ -1,4 +1,14 @@
 body{
-    background-image:url(../../assets/img/fondo2.jpg) ;
-    background-size:cover
+    background-image:url(../../assets/img/fondo2.jpg);
+    background-size:cover;
+}
+.tabla{
+    margin-top: 75px;
+    border-radius: 10px;
+    padding: 20px;
+}
+th, td, .tabla{
+    background-color: rgba(0, 0, 0, 0.678)!important;
+    border-color: rgba(255, 0, 0, 0.568)!important;
+    color: azure!important;
 }

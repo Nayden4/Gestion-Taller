@@ -6,22 +6,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClientesListaComponent } from './clientes-lista/clientes-lista.component';
 import { InicioComponent } from './inicio/inicio.component';
-import { FilterPipe } from './clientes-lista/filter.pipe';
+import { ClientesFilterPipe } from './clientes-lista/clientes-filter.pipe';
+import { VehiculosFilterPipe } from './vehiculos-lista/vehiculos-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ClientesCrearComponent } from './clientes-crear/clientes-crear.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientesEditarComponent } from './clientes-editar/clientes-editar.component';
+import { VehiculosListaComponent } from './vehiculos-lista/vehiculos-lista.component';
+import { VehiculosCrearComponent } from './vehiculos-crear/vehiculos-crear.component';
+import { VehiculosEditarComponent } from './vehiculos-editar/vehiculos-editar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientesListaComponent,
     InicioComponent,
-    FilterPipe,
+    ClientesFilterPipe,
     ClientesCrearComponent,
-    ClientesEditarComponent
+    ClientesEditarComponent,
+    VehiculosListaComponent,
+    VehiculosFilterPipe,
+    VehiculosCrearComponent,
+    VehiculosEditarComponent,
   ],
   imports: [
     BrowserModule,

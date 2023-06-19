@@ -6,6 +6,7 @@ export interface IVehiculo {
     marca:string;
     modelo:string;
     km:string;
+    cv:string;
     proximaItv:string;
     cliente:ICliente;
 }

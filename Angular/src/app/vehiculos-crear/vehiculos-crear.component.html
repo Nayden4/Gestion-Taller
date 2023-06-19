@@ -1,0 +1,83 @@
+<div class="card">
+    <div class="card-header bg-danger text-white text-center">
+        <h1>Crear vehiculo</h1>
+    </div>
+    <div class="card-body">
+
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+            <div class="form-group">
+                <label for="matricula" class="form-label">Matricula:</label>
+                <input id="matricula" placeholder="Matricula" class="form-control" formControlName="matricula">
+            </div>
+
+            <div *ngIf="formErrors['matricula'].length > 0" class="alert alert-danger">
+                {{formErrors['matricula']}}
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="marca" class="form-label">Marca:</label>
+                <input id="marca" placeholder="Marca" class="form-control" formControlName="marca">
+            </div>
+            <div *ngIf="formErrors['marca'].length > 0" class="alert alert-danger">
+                {{formErrors['marca']}}
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="modelo" class="form-label">Modelo:</label>
+                <input id="modelo" placeholder="Modelo" class="form-control" formControlName="modelo">
+            </div>
+
+            <br>
+
+
+            <div class="form-group">
+                <label for="km" class="form-label">Km:</label>
+                <input id="km" placeholder="Km" class="form-control" formControlName="km">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="cv" class="form-label">CV:</label>
+                <input id="cv" placeholder="cv" class="form-control" formControlName="cv">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="proximaItv" class="form-label">Proxima ITV:</label>
+                <input type="date" id="proxima Itv" placeholder="proximaItv" class="form-control"
+                    formControlName="proximaItv">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="cliente" class="form-label">Cliente:</label>
+                <input id="cliente" placeholder="Nombre, apellidos, nif, telefono o correo electronico"
+                    class="form-control" formControlName="cliente_id" [(ngModel)]="parametro"
+                    (keyup)="clientesBuscar(parametro)">
+                <div *ngIf="formErrors['cliente_id'].length > 0" class="alert alert-danger">
+                    {{formErrors['cliente_id']}}
+                </div>
+                <div id="resultados"
+                    style="background-color: rgba(0, 0, 0, 0.247); border-radius: 5px; margin-top: 5px; padding-left: 20px;">
+                    <tr *ngFor="let cliente of clientesFiltrados">
+                        <a style="color:red; cursor: pointer;" (click)="clienteSeleccionado(cliente.id,cliente.nombre,cliente.apellidos)">{{cliente.nombre}} {{cliente.apellidos}}</a>
+                    </tr>
+                </div>
+
+
+            </div>
+            <br>
+
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-lg btn-success">Crear</button>
+                </div>
+                <div class="col-md-6">
+                    <button [routerLink]="['/vehiculos-lista']" class="btn btn-lg btn-danger">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -12,6 +12,20 @@ class ClienteController extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+
+    function buscarClientes($parametro)
+    {
+        if ($parametro!='') {
+            $clientes = Cliente::where('nombre', 'like', "%$parametro%")
+                ->orWhere('apellidos', 'like', "%$parametro%")
+                ->orWhere('nif', 'like', "%$parametro%")
+                ->orWhere('telefono', 'like', "%$parametro%")
+                ->orWhere('email', 'like', "%$parametro%")
+                ->get();
+            return $clientes;
+        }
+        return '';
+    }
     function getClientes()
     {
         return Cliente::all();
@@ -41,6 +55,7 @@ class ClienteController extends BaseController
 
         ]);
 
+
         return $cliente;
 
 
@@ -64,5 +79,14 @@ class ClienteController extends BaseController
 
         return $cliente;
     }
+
+    function deleteCliente($id)
+    {
+        $client = Cliente::find($id);
+        $client->delete();
+
+        return $client;
+    }
+
 
 }

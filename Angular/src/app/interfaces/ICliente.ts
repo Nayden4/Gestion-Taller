@@ -1,4 +1,3 @@
-import { IVehiculo } from "./IVehiculo";
 
 export interface ICliente {
     id:number;
