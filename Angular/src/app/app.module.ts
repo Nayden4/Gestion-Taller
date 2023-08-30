@@ -17,6 +17,10 @@ import { ClientesEditarComponent } from './clientes-editar/clientes-editar.compo
 import { VehiculosListaComponent } from './vehiculos-lista/vehiculos-lista.component';
 import { VehiculosCrearComponent } from './vehiculos-crear/vehiculos-crear.component';
 import { VehiculosEditarComponent } from './vehiculos-editar/vehiculos-editar.component';
+import { FacturasListaComponent } from './facturas-lista/facturas-lista.component';
+import { FilterPipe } from './facturas-lista/filter.pipe';
+import { FacturasCrearComponent } from './facturas-crear/facturas-crear.component';
+import { FacturasDownloadComponent } from './facturas-download/facturas-download.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,10 @@ import { VehiculosEditarComponent } from './vehiculos-editar/vehiculos-editar.co
     VehiculosFilterPipe,
     VehiculosCrearComponent,
     VehiculosEditarComponent,
+    FacturasListaComponent,
+    FilterPipe,
+    FacturasCrearComponent,
+    FacturasDownloadComponent,
   ],
   imports: [
     BrowserModule,

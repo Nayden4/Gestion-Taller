@@ -74,5 +74,16 @@ class VehiculoController extends BaseController
         return $vehiculo;
     }
 
+    function getVehiculoCliene($id)
+    {
+
+        $vehicles = Vehiculo::where('cliente_id', $id)->get();
+        return $vehicles;
+
+    }
+
+
+
+
 
 }

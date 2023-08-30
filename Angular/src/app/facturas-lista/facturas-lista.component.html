@@ -1,0 +1,60 @@
+<body>
+    <div class="container">
+        <div class="panel-heading text-center">
+            <h1>Facturas</h1>
+        </div>
+
+        <!-- caixa de filtrat -->
+
+        <div class="row section text-center">
+            <div class="col-md-6">
+                <label>Buscar:</label>
+                <input type="text" placeholder="Nombre, Apellidos, NIF" [(ngModel)]="listFilter">
+            </div>
+            <div class="col-md-6">
+                <button [routerLink]="['../facturas-crear/']" class="btn btn-crear btn-success">Nueva factura</button>
+                <button [routerLink]="['']" class="btn btn-crear btn-danger">Volver</button>
+            </div>
+        </div>
+        <!-- fi caixa filtrat -->
+
+
+        <div *ngIf="facturas.length==0">
+            <h4>No hay facturas</h4>
+        </div>
+        <div *ngIf="facturas.length>0" class="table-responsive tabla">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nº Factura</th>
+                        <th>Total con IVA</th>
+                        <th>Cliente</th>
+                        <th>Coche</th>
+                        <th>Fecha</th>
+                        <th></th>
+                        <th></th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let factura of facturas | facturasListFilter:listFilter | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage}">
+                        <td>{{factura.numero}}</td>
+                        <td>{{factura.totalConIva}}</td>
+                        <td>{{factura.nombre}} {{factura.apellidos}}</td>
+                        <td>{{factura.marca}} {{factura.modelo}}</td>
+                        <td>{{factura.data}}</td>
+
+                        <td><a [routerLink]="['../facturas-editar/'+factura.id]">Editar</a></td>
+                        <td><a href="" (click)="eliminarFactura(factura.id)">Eliminar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls previousLabel="Anterior" nextLabel="Siguiente"
+                (pageChange)="currentPage = $event"></pagination-controls>
+
+
+        </div>
+    </div>
+</body>

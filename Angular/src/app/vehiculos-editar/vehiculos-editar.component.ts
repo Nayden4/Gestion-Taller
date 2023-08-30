@@ -39,6 +39,8 @@ export class VehiculosEditarComponent {
   formErrors: any = {
     matricula: '',
     marca: '',
+    modelo:'',
+    km:'',
     cliente_id: ''
   };
   validationMessages: any = {
@@ -47,6 +49,12 @@ export class VehiculosEditarComponent {
     },
     marca: {
       required: 'La marca es obligatoria.'
+    },
+    modelo: {
+      required: 'El modelo es obligatorio.'
+    },
+    km: {
+      required: 'Los km son obligatorios.'
     },
     cliente_id: {
       required: 'El cliente es obligatorio.'
@@ -91,8 +99,8 @@ export class VehiculosEditarComponent {
     this.myForm = this.formBuilder.group({
       matricula: ['', [Validators.required]],
       marca: ['', [Validators.required]],
-      modelo: [''],
-      km: [''],
+      modelo: ['', [Validators.required]],
+      km: ['', [Validators.required]],
       cv: [''],
       proximaItv: [''],
 

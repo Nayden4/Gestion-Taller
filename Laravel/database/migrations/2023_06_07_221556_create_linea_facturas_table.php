@@ -17,6 +17,7 @@ return new class extends Migration
 
             $table->string('nombre');
             $table->double('unidades');
+            $table->double('precioUn');
             $table->double('precioSinIva');
             $table->double('precioConIva');
 

@@ -31,8 +31,8 @@ return new class extends Migration
 
             //Datos Vehiculo
 
-            $table->string('matricula');
-            $table->string('marca');
+            $table->string('matricula')->nullable();
+            $table->string('marca')->nullable();
             $table->string('modelo')->nullable();
             $table->string('km')->nullable();
 

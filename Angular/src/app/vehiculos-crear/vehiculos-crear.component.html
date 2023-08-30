@@ -6,7 +6,7 @@
 
         <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
             <div class="form-group">
-                <label for="matricula" class="form-label">Matricula:</label>
+                <label for="matricula" class="form-label">*Matricula:</label>
                 <input id="matricula" placeholder="Matricula" class="form-control" formControlName="matricula">
             </div>
 
@@ -16,7 +16,7 @@
             <br>
 
             <div class="form-group">
-                <label for="marca" class="form-label">Marca:</label>
+                <label for="marca" class="form-label">*Marca:</label>
                 <input id="marca" placeholder="Marca" class="form-control" formControlName="marca">
             </div>
             <div *ngIf="formErrors['marca'].length > 0" class="alert alert-danger">
@@ -25,16 +25,21 @@
             <br>
 
             <div class="form-group">
-                <label for="modelo" class="form-label">Modelo:</label>
+                <label for="modelo" class="form-label">*Modelo:</label>
                 <input id="modelo" placeholder="Modelo" class="form-control" formControlName="modelo">
             </div>
-
+            <div *ngIf="formErrors['modelo'].length > 0" class="alert alert-danger">
+                {{formErrors['modelo']}}
+            </div>
             <br>
 
 
             <div class="form-group">
-                <label for="km" class="form-label">Km:</label>
+                <label for="km" class="form-label">*Km:</label>
                 <input id="km" placeholder="Km" class="form-control" formControlName="km">
+            </div>
+            <div *ngIf="formErrors['km'].length > 0" class="alert alert-danger">
+                {{formErrors['km']}}
             </div>
             <br>
 

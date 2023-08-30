@@ -1,12 +1,12 @@
 <div class="card">
     <div class="card-header bg-danger text-white text-center">
-        <h1>Crear vehiculo</h1>
+        <h1>Editar vehiculo</h1>
     </div>
     <div class="card-body">
 
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-                <label for="matricula" class="form-label">Matricula:</label>
+                <label for="matricula" class="form-label">*Matricula:</label>
                 <input id="matricula" placeholder="Matricula" class="form-control" formControlName="matricula">
             </div>
 
@@ -16,7 +16,7 @@
             <br>
 
             <div class="form-group">
-                <label for="marca" class="form-label">Marca:</label>
+                <label for="marca" class="form-label">*Marca:</label>
                 <input id="marca" placeholder="Marca" class="form-control" formControlName="marca">
             </div>
             <div *ngIf="formErrors['marca'].length > 0" class="alert alert-danger">
@@ -25,16 +25,21 @@
             <br>
 
             <div class="form-group">
-                <label for="modelo" class="form-label">Modelo:</label>
+                <label for="modelo" class="form-label">*Modelo:</label>
                 <input id="modelo" placeholder="Modelo" class="form-control" formControlName="modelo">
             </div>
-
+            <div *ngIf="formErrors['modelo'].length > 0" class="alert alert-danger">
+                {{formErrors['modelo']}}
+            </div>
             <br>
 
 
             <div class="form-group">
-                <label for="km" class="form-label">Km:</label>
+                <label for="km" class="form-label">*Km:</label>
                 <input id="km" placeholder="Km" class="form-control" formControlName="km">
+            </div>
+            <div *ngIf="formErrors['km'].length > 0" class="alert alert-danger">
+                {{formErrors['km']}}
             </div>
             <br>
 
@@ -53,7 +58,7 @@
 
             <div class="row text-center">
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-lg btn-success">Crear</button>
+                    <button type="submit" class="btn btn-lg btn-success">Guardar</button>
                 </div>
                 <div class="col-md-6">
                     <button [routerLink]="['/vehiculos-lista']" class="btn btn-lg btn-danger">Cancelar</button>

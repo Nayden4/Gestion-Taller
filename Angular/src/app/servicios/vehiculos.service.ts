@@ -46,6 +46,10 @@ export class VehiculosService {
     return this._http.get<IVehiculo[]>(environment.apiUrl + 'vehiculos-itv', { observe: 'response' });
   }
 
+  public getVehiculoCliente(idClient: any): Observable<HttpResponse<IVehiculo[]>>{
+    return this._http.get<IVehiculo[]>(environment.apiUrl + 'vehiculo-cliente/' + idClient, { observe: 'response' });
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

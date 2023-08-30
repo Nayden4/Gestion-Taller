@@ -17,8 +17,8 @@ return new class extends Migration
 
             $table->string('matricula');
             $table->string('marca');
-            $table->string('modelo')->nullable();
-            $table->string('km')->nullable();
+            $table->string('modelo');
+            $table->string('km');
             $table->string('cv')->nullable();
             $table->date('proximaItv')->nullable();
 

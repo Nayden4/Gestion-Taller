@@ -7,6 +7,8 @@ import { ClientesEditarComponent } from './clientes-editar/clientes-editar.compo
 import { VehiculosListaComponent } from './vehiculos-lista/vehiculos-lista.component';
 import { VehiculosCrearComponent } from './vehiculos-crear/vehiculos-crear.component';
 import { VehiculosEditarComponent } from './vehiculos-editar/vehiculos-editar.component';
+import { FacturasListaComponent } from './facturas-lista/facturas-lista.component';
+import { FacturasCrearComponent } from './facturas-crear/facturas-crear.component';
 
 const routes: Routes = [
   {path:'clientes-lista', component: ClientesListaComponent},
@@ -16,6 +18,9 @@ const routes: Routes = [
   {path:'vehiculos-lista', component: VehiculosListaComponent},
   {path:'vehiculos-crear', component: VehiculosCrearComponent},
   {path:'vehiculos-editar/:id', component: VehiculosEditarComponent},
+
+  {path:'facturas-lista', component: FacturasListaComponent},
+  {path:'facturas-crear', component: FacturasCrearComponent},
 
 
   { path: '', component: InicioComponent},
