@@ -9,12 +9,11 @@ body {
     font-size: 14px;
     line-height: 1.5;
     padding: 20px;
-    margin-bottom: 50px;
 }
 
 
 .container {
-    max-width: 800px;
+    max-width: 80%;
     margin: 0 auto;
     background-color: #ffffff;
     padding: 20px;
@@ -213,19 +212,5 @@ input {
     border-style: solid;
     padding-bottom: 7px;
     padding-top: 7px;
-    text-align: justify;
-    
 
-}
-table{
-    width: 100%;
-}
-.logo{
-    width: 80%;
-    margin-left: 0;
-}
-
-.descargar{
-    margin-left: 45%;
-    margin-bottom: 50px;
 }

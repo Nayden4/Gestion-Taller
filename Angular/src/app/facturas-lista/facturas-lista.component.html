@@ -33,6 +33,8 @@
                         <th>Fecha</th>
                         <th></th>
                         <th></th>
+                        <th></th>
+
 
 
 
@@ -46,8 +48,10 @@
                         <td>{{factura.marca}} {{factura.modelo}}</td>
                         <td>{{factura.data}}</td>
 
-                        <td><a [routerLink]="['../facturas-editar/'+factura.id]">Editar</a></td>
-                        <td><a href="" (click)="eliminarFactura(factura.id)">Eliminar</a></td>
+                        <td><button class="btn btn-success" [routerLink]="['../facturas-download/'+factura.id]">Descargar</button></td>
+
+                        <td><button class="btn btn-warning" [routerLink]="['../facturas-editar/'+factura.id]">Editar</button></td>
+                        <td><button class="btn btn-danger" (click)="eliminarFactura(factura.id)">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>

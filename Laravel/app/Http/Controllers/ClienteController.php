@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -15,7 +16,7 @@ class ClienteController extends BaseController
 
     function buscarClientes($parametro)
     {
-        if ($parametro!='') {
+        if ($parametro != '') {
             $clientes = Cliente::where('nombre', 'like', "%$parametro%")
                 ->orWhere('apellidos', 'like', "%$parametro%")
                 ->orWhere('nif', 'like', "%$parametro%")
@@ -80,12 +81,25 @@ class ClienteController extends BaseController
         return $cliente;
     }
 
-    function deleteCliente($id)
-    {
-        $client = Cliente::find($id);
-        $client->delete();
 
-        return $client;
+    public function deleteCliente($id)
+    {
+        // Busca al cliente por su ID
+        $cliente = Cliente::find($id);
+
+        if (!$cliente) {
+            // Si el cliente no se encuentra, puedes manejar el error aquí
+            return response()->json(['mensaje' => 'Cliente no encontrado'], 404);
+        }
+
+        // Borra todos los vehículos asociados al cliente
+        Vehiculo::where('cliente_id', $cliente->id)->delete();
+
+        // Borra al cliente
+        $cliente->delete();
+
+        // Puedes retornar una respuesta exitosa si lo deseas
+        return response()->json(['mensaje' => 'Cliente y vehículos asociados eliminados con éxito'], 200);
     }
 
 

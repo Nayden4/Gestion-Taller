@@ -1,42 +1,38 @@
 import { Component } from '@angular/core';
 import { ClientesService } from '../servicios/clientes.service';
-import { ICliente } from '../interfaces/ICliente';
 import { VehiculosService } from '../servicios/vehiculos.service';
-import { IVehiculo } from '../interfaces/IVehiculo';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FacturasService } from '../servicios/facturas.service';
-import { Router } from '@angular/router';
-
+import { ICliente } from '../interfaces/ICliente';
+import { IVehiculo } from '../interfaces/IVehiculo';
+import { direction } from 'html2canvas/dist/types/css/property-descriptors/direction';
 
 @Component({
-  selector: 'app-facturas-crear',
-  templateUrl: './facturas-crear.component.html',
-  styleUrls: ['./facturas-crear.component.css']
+  selector: 'app-facturas-editar',
+  templateUrl: './facturas-editar.component.html',
+  styleUrls: ['./facturas-editar.component.css']
 })
-export class FacturasCrearComponent {
+export class FacturasEditarComponent {
   constructor(
     private clientesService: ClientesService,
     private vehiculosService: VehiculosService,
     private FacturasService: FacturasService,
     private router: Router,
+    private ruta: ActivatedRoute,
 
 
   ) { }
+  id: string | null = '';
+
   ngOnInit(): void {
-    this.numeroPorDefecto();
-    this.fechaPorDefecto();
+
+    this.id = this.ruta.snapshot.paramMap.get('id');
+    this.getFactura(this.id);
+    this.getLineas(this.id);
 
   }
 
-  filas: any[] = [
-    {
-      articulo: '',
-      unidades: 0,
-      precioUn: 0,
-      subtotal: 0.0,
-      totalConIva: 0
-    }
-  ];
-
+  filas: any[] = [];
 
   factura: any = {
     descuento: 0,
@@ -49,15 +45,12 @@ export class FacturasCrearComponent {
     fecha: ''
   };
   cliente_id: any;
-  cliente: ICliente = {
+  cliente: any = {
     id: 0,
     nombre: '',
     apellidos: '',
     nif: '',
-    calle: '',
-    numero: 0,
-    cp: 0,
-    ciudad: '',
+    direccion: '',
     telefono: '',
     email: '',
     particularEmpresa: 0
@@ -73,10 +66,64 @@ export class FacturasCrearComponent {
     matricula: "",
     km: "",
     id: 0
-  }
+  };
 
   selectedOptionVehiculo: any;
   fecha: any;
+
+  getFactura(id: string | null) {
+    this.FacturasService.getFactura(id).subscribe(data => {
+      //factura
+      this.factura.fecha = data.data;
+      this.factura.numero = data.numero;
+      this.factura.total = data.totalConIva
+      this.factura.baseImponible = data.total;
+      this.factura.descuento = data.descuento;
+      this.factura.ivaDinero = (data.totalConIva - data.total).toFixed(2);
+      this.factura.subtotal = data.subtotal;
+      this.factura.ivaPorcentaje = data.ivaPorcentaje;
+
+
+      //client
+      this.cliente.nombre = data.nombre;
+      this.cliente.apellidos = data.apellidos;
+      this.cliente.direccion = data.direccion;
+      this.cliente.nif = data.nif;
+      this.cliente.telefono = data.telefono;
+console.log(data);
+
+      //vehicle
+      this.vehiculo.marca = data.marca;
+      this.vehiculo.modelo = data.modelo;
+      this.vehiculo.km = data.km;
+      this.vehiculo.matricula = data.matricula;
+      this.vehiculo.id = data.vehiculo_id;
+
+
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getLineas(id: string | null) {
+    this.FacturasService.getLinea(id).subscribe(data => {
+      if (Array.isArray(data)) { // Verifica si 'data' es un array
+
+        data.forEach((cont) => {
+          this.filas.push({
+            articulo: cont.nombre,
+            unidades: cont.unidades,
+            precioUn: cont.precioUn,
+            subtotal: cont.precioSinIva,
+            totalConIva: cont.precioConIva
+          });
+        });
+      } console.log(this.filas);
+    }, error => {
+      console.log(error);
+    });
+  }
+
 
   //Fila
 
@@ -199,7 +246,7 @@ export class FacturasCrearComponent {
 
 
   ivaFactura() {
-    if (this.factura.ivaPorcentaje && this.factura.baseImponible) {
+    if ((parseInt(this.factura.ivaPorcentaje)>0) && this.factura.baseImponible) {
       const ivaDinero = ((this.factura.baseImponible / 100) * this.factura.ivaPorcentaje);
       this.factura.ivaDinero = parseFloat(ivaDinero.toFixed(2));
     } else {
@@ -212,7 +259,7 @@ export class FacturasCrearComponent {
   }
 
   totalFactura() {
-    if (this.factura.baseImponible && this.factura.ivaDinero) {
+    if (this.factura.baseImponible) {
       const total = this.factura.baseImponible + this.factura.ivaDinero;
       this.factura.total = parseFloat(total.toFixed(2));
     } else {
@@ -221,22 +268,7 @@ export class FacturasCrearComponent {
     }
   }
 
-  fechaPorDefecto() {
-    const hoy = new Date();
-    const dia = hoy.getDate().toString().padStart(2, '0');
-    const mes = (hoy.getMonth() + 1).toString().padStart(2, '0'); // Enero es 0
-    const anio = hoy.getFullYear();
 
-    this.factura.fecha = `${anio}-${mes}-${dia}`;
-  }
-
-  numeroPorDefecto() {
-
-    this.FacturasService.getUltimaFactura().subscribe(resp => {
-      this.factura.numero = resp;
-    });
-
-  }
 
   // Relaciones
 
@@ -265,6 +297,11 @@ export class FacturasCrearComponent {
   getCliente(id: string | null) {
     this.clientesService.getCliente(id).subscribe(data => {
       this.cliente = data;
+      this.cliente.nombre = data.nombre;
+      this.cliente.apellidos = data.apellidos;
+      this.cliente.direccion = data.calle + ', ' + data.numero + ' ' + data.ciudad + ' ' + data.cp;
+      this.cliente.nif = data.nif;
+      this.cliente.telefono = data.telefono;
     }, error => {
       console.log(error);
     });
@@ -272,24 +309,26 @@ export class FacturasCrearComponent {
     this.vehiculosService.getVehiculoCliente(id).subscribe(resp => {
 
       if (resp.body) this.vehiculos = resp.body.reverse();
+      this.vehiculo = "";
     });
   }
 
-  actualizarVehiculo(id: any) {
 
-    this.vehiculosService.getVehiculo(id).subscribe(data => {
-      console.log(id);
+  actualizarVehiculo(index: any) {
 
-      this.vehiculo.marca = data.marca,
-        this.vehiculo.modelo = data.modelo,
-        this.vehiculo.matricula = data.matricula,
-        this.vehiculo.km = data.km
-      this.vehiculo.id = id;
+    this.vehiculosService.getVehiculo(index).subscribe(data => {
+      console.log();
+
+      if (data) {
+        this.vehiculo = data;
+
+      } else {
+        console.error('La respuesta de la solicitud no contiene datos válidos.');
+      }
 
 
     });
   }
-
   setKm() {
 
     const km: HTMLInputElement = document.getElementById("km") as HTMLInputElement;
@@ -343,7 +382,7 @@ export class FacturasCrearComponent {
       errores = false;
     }
 
-    if (this.cliente_id) {
+    if (this.cliente.nif) {
       this.error_cliente = "";
     } else {
       this.error_cliente = "Seleccionar un cliente";
@@ -366,13 +405,16 @@ export class FacturasCrearComponent {
           errores = false;
           break; // Detener el bucle en caso de encontrar un campo vacío
         }
+        
       }
     });
-
     if (this.error_factura) {
       this.error_filas = "";
 
     }
+
+
+
 
     if (errores) {
       this.error_filas = "";
@@ -386,9 +428,10 @@ export class FacturasCrearComponent {
       }else{
         formData.append('descuento',"0");
       }
+      
       formData.append('nombre', this.cliente.nombre);
       formData.append('apellidos', this.cliente.apellidos);
-      formData.append('direccion', this.cliente.calle + ', ' + this.cliente.numero + ' ' + this.cliente.ciudad + ' ' + this.cliente.cp);
+      formData.append('direccion', this.cliente.direccion);
       formData.append('nif', this.cliente.nif);
       formData.append('telefono', this.cliente.telefono);
 
@@ -401,7 +444,7 @@ export class FacturasCrearComponent {
       if (this.vehiculo.id) { formData.append('vehiculo_id', this.vehiculo.id); }
 
 
-      this.FacturasService.postFactura(formData).subscribe({
+      this.FacturasService.putFactura(this.id, formData).subscribe({
         next: (data) => {
           this.router.navigate(['facturas-lista/'])
 
@@ -416,9 +459,4 @@ export class FacturasCrearComponent {
 
 
   }
-
-
 }
-
-
-

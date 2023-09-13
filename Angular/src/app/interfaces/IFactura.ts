@@ -14,5 +14,13 @@ export interface IFactura{
     marca:string;
     modelo:string;
     km:string;
+    subtotal:number;
+    telefono:string;
+    ivaPorcentaje:string;
+    vehiculo_id:number;
+
+
+
+
 
 }

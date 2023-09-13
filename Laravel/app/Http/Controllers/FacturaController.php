@@ -48,6 +48,13 @@ class FacturaController extends BaseController
                     'modelo' => $request->modelo,
                     'km' => $request->km,
                     'numero' => $request->numero,
+                    'telefono' => $request->telefono,
+                    'subtotal' => $request->subtotal,
+                    'ivaPorcentaje' => $request->ivaPorcentaje,
+                    'vehiculo_id' => $request->vehiculo_id,
+
+
+
                 ]);
 
                 if ($request->km) {
@@ -95,6 +102,74 @@ class FacturaController extends BaseController
 
         return $numero;
 
+    }
+
+    function deleteFactura($id)
+    {
+        $factura = Factura::find($id);
+
+        if (!$factura) {
+            return null; // O manejar el caso donde la factura no existe
+        }
+
+        $factura->delete();
+
+        // Eliminar las líneas de factura relacionadas
+        LineaFactura::where('factura_id', $id)->delete();
+
+        return $factura;
+    }
+
+    public function updateFactura(Request $request, $id)
+    {
+        return DB::transaction(function () use ($request, $id) {
+            $factura = Factura::find($id);
+
+            if (!$factura) {
+                // Manejar el caso en el que la factura no existe
+                return null;
+            }
+
+            try {
+                $factura->update([
+                    'data' => $request->data,
+                    'total' => $request->total,
+                    'totalConIva' => $request->totalConIva,
+                    'descuento' => $request->descuento,
+                    'nombre' => $request->nombre,
+                    'apellidos' => $request->apellidos,
+                    'direccion' => $request->direccion,
+                    'nif' => $request->nif,
+                    'matricula' => $request->matricula,
+                    'marca' => $request->marca,
+                    'modelo' => $request->modelo,
+                    'km' => $request->km,
+                    'vehiculo_id' => $request->vehiculo_id,
+                    'numero' => $request->numero,
+                    'telefono' => $request->telefono,
+                    'subtotal' => $request->subtotal,
+                    'ivaPorcentaje' => $request->ivaPorcentaje,
+                ]);
+
+                if ($request->km) {
+                    $vehiculo = Vehiculo::find($request->vehiculo_id);
+                    $vehiculo->km = $request->km;
+                    $vehiculo->save();
+                }
+
+                $lineas = json_decode($request->lineas, true);
+
+                // Eliminar las líneas de factura existentes
+                LineaFactura::where('factura_id', $factura->id)->delete();
+
+                // Insertar las nuevas líneas de factura
+                $this->insertLineas($factura->id, $lineas);
+
+            } catch (\Exception $e) {
+                throw $e; // Lanzar la excepción para que la transacción se revierta
+            }
+            return $factura;
+        });
     }
 
 

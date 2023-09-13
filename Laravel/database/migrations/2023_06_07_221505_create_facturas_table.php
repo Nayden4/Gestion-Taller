@@ -21,6 +21,8 @@ return new class extends Migration
             $table->double('total');
             $table->double('totalConIva');
             $table->double('descuento')->nullable();
+            $table->double('subtotal');
+            $table->String('ivaPorcentaje');
 
             //Datos cliente
 
@@ -28,6 +30,7 @@ return new class extends Migration
             $table->string('apellidos')->nullable();
             $table->string('direccion')->nullable();
             $table->string('nif')->nullable();
+            $table->String('telefono');
 
             //Datos Vehiculo
 
@@ -35,6 +38,7 @@ return new class extends Migration
             $table->string('marca')->nullable();
             $table->string('modelo')->nullable();
             $table->string('km')->nullable();
+            $table->int('vehiculo_id')->nullable();
 
 
      

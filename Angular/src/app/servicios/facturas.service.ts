@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IFactura } from '../interfaces/IFactura';
 import { Observable, ObservableInput, catchError, throwError } from 'rxjs';
+import { ILineaFactura } from '../interfaces/ILineaFactura';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,26 @@ export class FacturasService {
   public deleteFactura(id: any): Observable<any> {
     return this._http.delete(`${environment.apiUrl}factura/${id}`);
   }
+
+  public getLinea(id: any): Observable<ILineaFactura> {
+    return this._http.get<ILineaFactura>(`${environment.apiUrl}lineaFactura/${id}`);
+  }
+
+  public putFactura(id: any, dada: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+      }),
+    };
+    const options = { params: new HttpParams().set('observe', 'response') }
+    console.log(dada);
+    return this._http.post(`${environment.apiUrl}factura/${id}`, dada, {
+      observe: 'response', headers: new HttpHeaders({
+      })
+    });
+
+  }
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

@@ -22,23 +22,36 @@ export class ClientesCrearComponent {
   errorMessage: string = '';
   formErrors: any = {
     nombre: '',
+    nif: '',
+    calle: '',
     numero:'',
     cp:'',
+    ciudad: '',
     email: '',
   };
   validationMessages: any = {
     nombre: {
       required: 'El nombre es obligatorio.',
     },
+    nif: {
+      required: 'El nif es obligatorio.',
+    },
+    calle: {
+      required: 'La calle es obligatoria.',
+    },
     numero: {
-      pattern:'El numero no puede contener letras'
+      required: 'El numero es obligatorio.',
     },
     cp: {
-      pattern: 'El Codigo Postal no puede contener letras',
+      required: 'El Codigo Postal es obligatorio.',
+    },
+    ciudad: {
+      required: 'La ciudad es obligatoria.',
     },
     email: {
       email: 'El correo electrónico no es válido.'
     }
+
   };
 
 
@@ -51,11 +64,11 @@ export class ClientesCrearComponent {
     this.myForm = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       apellidos: [''],
-      nif: [''],
-      calle: [''],
-      numero: ['', [Validators.pattern('^[0-9]+$')]],
-      cp: ['', [Validators.pattern('^[0-9]+$')]],
-      ciudad: [''],
+      nif: ['', [Validators.required]],
+      calle: ['', [Validators.required]],
+      numero: ['', [Validators.required]],
+      cp: ['', [Validators.required]],
+      ciudad: ['', [Validators.required]],
       telefono: [''],
       email: ['', [Validators.email]],
       particularEmpresa:['']
@@ -75,6 +88,10 @@ export class ClientesCrearComponent {
       return;
     }
     
+    if(!cliente.particularEmpresa){
+      cliente.particularEmpresa=0;
+    }
+
     this.clientesService.postCliente(cliente).subscribe({
       next: (data) => {
         this.router.navigate(['clientes-lista'])

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\LineaController;
 
 
 
@@ -35,6 +36,12 @@ Route::delete('/vehiculo/{id}', [VehiculoController::class, 'deleteVehiculo']);
 //Facturas
 
 Route::get('/facturas', [FacturaController::class, 'getFacturas']);
+Route::get('/factura/{id}', [FacturaController::class, 'getFactura']);
 Route::get('/ultimaFactura', [FacturaController::class, 'getUltimaFactura']);
 Route::post('/factura', [FacturaController::class, 'insertFactura']);
+Route::delete('/factura/{id}', [FacturaController::class, 'deleteFactura']);
+Route::post('/factura/{id}', [FacturaController::class, 'updateFactura']);
+
+Route::get('/lineaFactura/{id}', [LineaController::class, 'getLineas']);
+
 

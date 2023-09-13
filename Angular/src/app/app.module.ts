@@ -21,6 +21,8 @@ import { FacturasListaComponent } from './facturas-lista/facturas-lista.componen
 import { FilterPipe } from './facturas-lista/filter.pipe';
 import { FacturasCrearComponent } from './facturas-crear/facturas-crear.component';
 import { FacturasDownloadComponent } from './facturas-download/facturas-download.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { FacturasEditarComponent } from './facturas-editar/facturas-editar.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { FacturasDownloadComponent } from './facturas-download/facturas-download
     FilterPipe,
     FacturasCrearComponent,
     FacturasDownloadComponent,
+    NavBarComponent,
+    FacturasEditarComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,7 @@ import { FacturasDownloadComponent } from './facturas-download/facturas-download
     ReactiveFormsModule
 
   ],
+  exports: [NavBarComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

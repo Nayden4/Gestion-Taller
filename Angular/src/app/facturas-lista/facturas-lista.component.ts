@@ -41,6 +41,5 @@ export class FacturasListaComponent {
             console.log(error);
           });
     }
-    this.router.navigate(['facturas-lista']);
   }
 }

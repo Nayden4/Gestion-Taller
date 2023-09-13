@@ -51,8 +51,8 @@
                         <td>{{vehiculo.cliente.nombre}} {{vehiculo.cliente.apellidos}}</td>
 
 
-                        <td><a [routerLink]="['../vehiculos-editar/'+vehiculo.id]">Editar</a></td>
-                        <td><a href="" (click)="eliminarVehiculo(vehiculo.id)">Eliminar</a></td>
+                        <td><button class="btn btn-warning" [routerLink]="['../vehiculos-editar/'+vehiculo.id]">Editar</button></td>
+                        <td><button class="btn btn-danger" (click)="eliminarVehiculo(vehiculo.id)">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>

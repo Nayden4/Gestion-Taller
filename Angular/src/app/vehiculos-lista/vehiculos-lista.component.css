@@ -3,10 +3,13 @@ h1{
 }
 .tabla{
 margin-top: 30px;
-background-color: rgba(224, 4, 4, 0.856);
+
 }
 
 button{
     margin:10px;
 }
 
+.custom-pagination ::ng-deep .ngx-pagination .current {
+    background: red;
+}

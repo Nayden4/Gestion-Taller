@@ -1,0 +1,13 @@
+.active{
+    background-color: rgb(168, 5, 5)!important;
+
+}
+.nav-link{
+color: white;
+}
+.nav-link:hover{
+    color: rgb(168, 5, 5);
+    }
+.container{
+    width: 100%;
+}

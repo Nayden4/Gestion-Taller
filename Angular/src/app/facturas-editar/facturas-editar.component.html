@@ -3,32 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Factura </title>
+    <title>Factura</title>
 </head>
-<div id="htmlData">
 
-<body >
-
-
+<body>
     <div class="container">
+        <h1>Factura</h1>
 
         <div class="row">
-
-            <div class="col-4 dataDiv">
-                <h2>Fecha <strong>{{factura.fecha}}</strong></h2>
-                <h2>Factura Nº <strong>{{factura.numero}}</strong></h2>
-            </div>
-            <div class="col">
-                <img src="../../assets/img/logo_factura.png" class="logo">
+            <div class="col dataDiv">
+                <h2>Numero</h2>
+                <input id="numero" class="form-control" (keyup)="setFactura()" (change)="setFactura()" type="number" [value]="factura.numero">
+                <p class="error">{{error_numeroFac}}</p>
 
             </div>
+            <div class="col dataDiv">
+                <h2>Fecha</h2>
+                <input id="fecha" (keyup)="setFecha()" (change)="setFecha()" class="form-control" type="date" [value]="factura.fecha">
+                <p class="error">{{error_fecha}}</p>
 
+            </div>
 
-   
         </div>
-
+        <!-- <div class="row img col-12 d-flex justify-content-center align-items-center">
+            <img src="../../assets/img/logo_factura.png" class="w-50 img">
+        </div> -->
         <div class="row">
-            <div class="col-4 b-1 rounded border p-3">
+            <div class="col-sm b-1 rounded border p-3">
+                <img src="../../assets/img/logo_factura.png" class="w-100 img">
                 <table class="tallerInfo">
                     <tr>
                         <th>Nombre:</th>
@@ -36,25 +38,40 @@
                     </tr>
                     <tr>
                         <th class="campos">NIF:</th>
-                        <td class="campos">J42719120</td>
+                        <td>J42719120</td>
                     </tr>
                     <tr>
                         <th class="campos">Domicilio:</th>
-                        <td class="campos">C/ MONTCADA 80</td>
+                        <td>C/ MONTCADA 80</td>
                     </tr>
                     <tr>
                         <th class="campos">Ciudad:</th>
-                        <td class="campos">08291 RIPOLLET</td>
+                        <td>08291 RIPOLLET</td>
                     </tr>
                     <tr>
                         <th class="campos">Telefono:</th>
-                        <td class="campos">933 49 12 89</td>
+                        <td>933 49 12 89</td>
                     </tr>
                 </table>
             </div>
-            <div class="col-4 rounded border p-3">
+            <div class="col-sm rounded border p-3">
                 <h2>Cliente</h2>
 
+                <p class="error">{{error_cliente}}</p>
+
+                <div class="form-group mb-3">
+                    <input id="cliente" placeholder="Nombre, NIF, telefono o correo electronico"
+                        class="form-control buscador" [(ngModel)]="parametro" (keyup)="clientesBuscar(parametro)"
+                        (input)="clientesBuscar(parametro)">
+
+                    <div id="resultados" class="resultados">
+                        <tr *ngFor="let cliente of clientesFiltrados">
+                            <a (click)="clienteSeleccionado(cliente.id)">{{cliente.nombre}}
+                                {{cliente.apellidos}}</a>
+                        </tr>
+                    </div>
+
+                </div>
 
                 <table>
                     <tr>
@@ -63,22 +80,34 @@
                     </tr>
                     <tr>
                         <th class="campos">Domicilio:</th>
-                        <td class="campos">{{cliente.direccion}}</td>
+                        <td>{{cliente.direccion}}</td>
                     </tr>
                     <tr>
                         <th class="campos">CIF/NIF:</th>
-                        <td class="campos">{{cliente.nif}}</td>
+                        <td>{{cliente.nif}}</td>
                     </tr>
                     <tr>
                         <th class="campos">Telefono:</th>
-                        <td class="campos">{{cliente.telefono}}</td>
+                        <td>{{cliente.telefono}}</td>
                     </tr>
                 </table>
+                <button (click)="abrirCrearCliente()" class="anadirCliente btn">+</button>
 
 
             </div>
-            <div class="col-4 rounded border p-3">
+            <div class="col-sm rounded border p-3">
                 <h2>Vehículo</h2>
+                <select class="form-select" [(ngModel)]="selectedOptionVehiculo"
+                    (change)="actualizarVehiculo(selectedOptionVehiculo)">
+                    <option value="">
+                        Selecciona un vehiculo
+                    </option>
+                    <option *ngFor="let vehiculo of vehiculos" [value]="vehiculo.id">
+                        {{vehiculo.marca}} {{vehiculo.modelo}}
+                    </option>
+
+                </select>
+                <p class="error"></p>
                 <table>
                     <tr>
                         <th>Marca:</th>
@@ -86,24 +115,27 @@
                     </tr>
                     <tr>
                         <th class="campos">Modelo:</th>
-                        <td class="campos">{{vehiculo.modelo}}</td>
+                        <td>{{vehiculo.modelo}}</td>
                     </tr>
                     <tr>
                         <th class="campos">Matricula:</th>
-                        <td class="campos">{{vehiculo.matricula}}</td>
+                        <td>{{vehiculo.matricula}}</td>
                     </tr>
                     <tr>
                         <th class="campos">Kilometros:</th>
-                        <td class="campos">{{vehiculo.km}}</td>
+                        <td><input class="form-control km" id="km" (keyup)="setKm()" value="{{vehiculo.km}}"></td>
                     </tr>
 
                 </table>
+
+                <button class="anadirVehiculo btn" (click)="abrirCrearVehiculo()">+</button>
 
             </div>
 
         </div>
 
         <hr class="my-4">
+        <p class="error">{{error_filas}}{{error_array}}</p>
 
         <div class="table-responsive">
             <table class="table">
@@ -120,25 +152,28 @@
                 <tbody>
                     <tr *ngFor="let fila of filas; let i = index ">
                         <td>
-                            <input id="subtotal{{i}}" class="form-control" value="{{ this.filas[i].articulo}}" readonly>
+                            <input id="articulo{{i}}" (keyup)="setArticulo(i)" value="{{ this.filas[i].articulo}}" class="form-control" value="">
                         </td>
                         <td>
-                            <input id="subtotal{{i}}" class="form-control" value="{{ this.filas[i].unidades}}" readonly>
+                            <input id="unidades{{i}}" (keyup)="setUnidades(i)" value="{{ this.filas[i].unidades}}" class="form-control">
                         </td>
                         <td>
-                            <input id="subtotal{{i}}" class="form-control" value="{{ this.filas[i].precioUn}}" readonly>
+                            <input id="precioUn{{i}}" (keyup)="setPrecioUn(i)" value="{{ this.filas[i].precioUn}}" class="form-control">
                         </td>
                         <td>
-                            <input id="subtotal{{i}}" class="form-control" value="{{ this.filas[i].subtotal}}" readonly>
+                            <input id="subtotal{{i}}" class="form-control" value="{{ this.filas[i].subtotal}}">
                         </td>
                         <td>
-                            <input id="totalConIva{{i}}" class="form-control" value="{{ this.filas[i].totalConIva}}" readonly>
+                            <input id="totalConIva{{i}}" class="form-control" value="{{ this.filas[i].totalConIva}}">
                         </td>
-                        <td> </td>
+                        <td> <button (click)="eliminarFila(i);subtotalFactura()"
+                                class="eliminar btn  bg-danger">-</button></td>
                     </tr>
                     <tr>
                         <div class="row">
-
+                            <div class="col-12 d-flex justify-content-center align-items-center">
+                                <button (click)="agregarFila()" class="anadir btn btn-lg">+</button>
+                            </div>
                         </div>
                     </tr>
                     <tr>
@@ -146,20 +181,20 @@
                             Descuento %
                         </th>
                         <th class="bg-rojo">
-                            <input id="descuento" value="{{this.factura.descuento}}"  class="form-control" readonly>
+                            <input id="descuento" value="0" (keyup)="setDescuento()" class="form-control">
 
                         </th>
                         <th class="bg-rojo">
                             Subtotal
                         </th>
                         <th class="bg-rojo">
-                            <input id="subtotalFac" class="form-control" value="{{this.factura.subtotal}}" readonly>
+                            <input id="subtotalFac" class="form-control" value="{{this.factura.subtotal}}">
                         </th>
                         <th class="bg-rojo">
                             Base Imponible
                         </th>
                         <th class="bg-rojo borde-extra1">
-                            <input id="baseImponible" class="form-control" value="{{this.factura.baseImponible}}" readonly>
+                            <input id="baseImponible" class="form-control baseImponible" value="{{this.factura.baseImponible}}">
 
                         </th>
 
@@ -175,13 +210,13 @@
                             IVA %
                         </th>
                         <th class="bg-negro">
-                            <input id="iva" value="{{this.factura.ivaPorcentaje}}" class="form-control" readonly>
+                            <input id="iva" value="21" class="form-control" (keyup)="setIva()">
                         </th>
                         <th class="bg-negro text-light">
                             Total IVA
                         </th>
                         <td class="bg-negro">
-                            <input id="ivaFac" value="0" class="form-control" value="{{this.factura.ivaDinero}}" readonly>
+                            <input id="ivaFac" value="0" class="form-control" value="{{this.factura.ivaDinero}}">
 
                         </td>
 
@@ -206,6 +241,7 @@
                 </tbody>
             </table>
         </div>
+        <button class="crear"  (click)="onSubmit()">CREAR FACTURA</button>
 
 
 
@@ -214,9 +250,4 @@
 
     </div>
 
-    
 </body>
-</div>
-<div class="descargar col-md-4 mx-a">
-    <button class="btn btn-success btn-block" (click)="openPDF()">Descargar PDF</button>
-</div>

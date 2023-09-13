@@ -51,8 +51,9 @@
             <td>{{cliente.email}}</td>
             <td *ngIf="cliente.particularEmpresa==1">Particular</td>
             <td *ngIf="cliente.particularEmpresa==2">Empresa</td>
-            <td><a [routerLink]="['../clientes-editar/'+cliente.id]">Editar</a></td>
-            <td><a href="" (click)="eliminarCliente(cliente.id)">Eliminar</a></td>
+            <td *ngIf="cliente.particularEmpresa!=1 && cliente.particularEmpresa!=2"></td>
+            <td><button class="btn btn-warning" [routerLink]="['../clientes-editar/'+cliente.id]">Editar</button></td>
+            <td><button class="btn btn-danger" (click)="eliminarCliente(cliente.id)">Eliminar</button></td>
           </tr>
         </tbody>
       </table>

@@ -139,7 +139,7 @@
         </div>
 
         <hr class="my-4">
-        <p class="error">{{error_filas}}</p>
+        <p class="error">{{error_filas}} {{error_array}}</p>
 
         <div class="table-responsive">
             <table class="table">
@@ -198,7 +198,7 @@
                             Base Imponible
                         </th>
                         <th class="bg-rojo borde-extra1">
-                            <input id="baseImponible" class="form-control" value="{{this.factura.baseImponible}}">
+                            <input id="baseImponible" class="form-control baseImponible" value="{{this.factura.baseImponible}}">
 
                         </th>
 
@@ -245,7 +245,7 @@
                 </tbody>
             </table>
         </div>
-        <button class="crear" (click)="onSubmit()">CREAR FACTURA</button>
+        <button class="crear"  (click)="onSubmit()">CREAR FACTURA</button>
 
 
 

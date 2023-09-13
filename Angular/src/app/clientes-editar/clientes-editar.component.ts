@@ -31,23 +31,36 @@ export class ClientesEditarComponent {
   }
   formErrors: any = {
     nombre: '',
-    numero: '',
-    cp: '',
+    nif: '',
+    calle: '',
+    numero:'',
+    cp:'',
+    ciudad: '',
     email: '',
   };
   validationMessages: any = {
     nombre: {
       required: 'El nombre es obligatorio.',
     },
+    nif: {
+      required: 'El nif es obligatorio.',
+    },
+    calle: {
+      required: 'La calle es obligatoria.',
+    },
     numero: {
-      pattern: 'El numero no puede contener letras'
+      required: 'El numero es obligatorio.',
     },
     cp: {
-      pattern: 'El Codigo Postal no puede contener letras',
+      required: 'El Codigo Postal es obligatorio.',
+    },
+    ciudad: {
+      required: 'La ciudad es obligatoria.',
     },
     email: {
       email: 'El correo electrónico no es válido.'
     }
+
   };
 
   constructor(
@@ -69,6 +82,8 @@ export class ClientesEditarComponent {
   getCliente(id: string | null) {
     this.clienteService.getCliente(id).subscribe(data => {
       this.cliente = data;
+
+      
       this.myForm.setValue({
         nombre: data.nombre,
         apellidos: data.apellidos,
@@ -89,17 +104,17 @@ export class ClientesEditarComponent {
 
   createForm(): void {
     this.myForm = this.formBuilder.group({
-
       nombre: ['', [Validators.required]],
       apellidos: [''],
-      nif: [''],
-      calle: [''],
-      numero: ['', [Validators.pattern('^[0-9]+$')]],
-      cp: ['', [Validators.pattern('^[0-9]+$')]],
-      ciudad: [''],
+      nif: ['', [Validators.required]],
+      calle: ['', [Validators.required]],
+      numero: ['', [Validators.required]],
+      cp: ['', [Validators.required]],
+      ciudad: ['', [Validators.required]],
       telefono: [''],
       email: ['', [Validators.email]],
-      particularEmpresa: ['']
+      particularEmpresa:['']
+
     });
   }
 
@@ -132,7 +147,8 @@ export class ClientesEditarComponent {
     if (ciudad) formData.append('ciudad', ciudad);
     if (telefono) formData.append('telefono', telefono);
     if (email) formData.append('email', email);
-    if (particularEmpresa) formData.append('particularEmpresa', particularEmpresa);
+    if (particularEmpresa) formData.append('particularEmpresa', particularEmpresa)
+    else{formData.append('particularEmpresa', "0")};
 
 
     const ps = this.clienteService.putCliente(this.id, formData);
