@@ -9,3 +9,7 @@ button{
     margin:10px;
 }
 
+.input-vacio {
+    background-color: red; /* Cambia el color de fondo a rojo cuando el campo está vacío */
+    /* Otros estilos que desees aplicar cuando el campo está vacío */
+  }

@@ -11,11 +11,24 @@
                 <label>Buscar:</label>
                 <input type="text" placeholder="Nombre, Apellidos, NIF" [(ngModel)]="listFilter">
             </div>
+
             <div class="col-md-6">
                 <button [routerLink]="['../facturas-crear/']" class="btn btn-crear btn-success">Nueva factura</button>
                 <button [routerLink]="['']" class="btn btn-crear btn-danger">Volver</button>
             </div>
         </div>
+       <div class="row section">
+
+            <div class="col-md-6">
+                <label>Desde </label>
+                <input type="date" class="form-control" [(ngModel)]="fechaInicio" [class.input-vacio]="!fechaInicio">
+            </div>
+            <div class="col-md-6">
+                <label>Hasta </label>
+                <input type="date" class="form-control" [(ngModel)]="fechaFin" [class.input-vacio]="!fechaFin">
+            </div>
+        </div>  
+
         <!-- fi caixa filtrat -->
 
 
@@ -41,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let factura of facturas | facturasListFilter:listFilter | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage}">
+                    <tr *ngFor="let factura of facturas | facturasListFilter: listFilter : fechaInicio : fechaFin | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage}">
                         <td>{{factura.numero}}</td>
                         <td>{{factura.totalConIva}}</td>
                         <td>{{factura.nombre}} {{factura.apellidos}}</td>
