@@ -112,30 +112,38 @@ export class FacturasCrearComponent {
   }
 
   setPrecioUn(index: number) {
+
     const precio: HTMLInputElement = document.getElementById("precioUn" + index) as HTMLInputElement;
-    const precioValue: number = parseFloat(precio.value);
+    let precioValue: number = parseFloat(precio.value);
+
 
     this.filas[index].precioUn = precioValue;
     this.calcularSubtotal(index);
   }
 
   calcularSubtotal(index: number) {
+
     if (this.filas[index].unidades && this.filas[index].precioUn) {
       this.filas[index].subtotal = this.filas[index].unidades * this.filas[index].precioUn;
 
-      this.filas[index].subtotal = parseFloat(this.filas[index].subtotal.toFixed(2));
-
-      this.subtotalFactura();
-
-      this.calcularIva(index);
+      this.filas[index].subtotal = parseFloat(this.filas[index].subtotal).toFixed(2);
+     
+    }else{
+      this.filas[index].subtotal=0.00.toFixed(2);
     }
+    this.subtotalFactura();
+
+    this.calcularIva(index);
+    
   }
 
 
   calcularIva(index: number) {
     if (this.filas[index].subtotal && this.factura.ivaPorcentaje) {
-      const totalConIva = ((this.filas[index].subtotal / 100) * this.factura.ivaPorcentaje) + this.filas[index].subtotal;
-      this.filas[index].totalConIva = parseFloat(totalConIva.toFixed(2));
+      const totalConIva = ((parseFloat(this.filas[index].subtotal) / 100) * this.factura.ivaPorcentaje) + parseFloat(this.filas[index].subtotal);
+      this.filas[index].totalConIva = totalConIva.toFixed(2);
+    }else{
+      this.filas[index].totalConIva=0.00.toFixed(2);
     }
   }
 
@@ -159,7 +167,7 @@ export class FacturasCrearComponent {
       }
     });
 
-    this.factura.subtotal = parseFloat(this.factura.subtotal.toFixed(2));
+    this.factura.subtotal = parseFloat(this.factura.subtotal).toFixed(2);
 
     this.baseImponible();
   }
@@ -169,9 +177,9 @@ export class FacturasCrearComponent {
   baseImponible() {
     if (this.factura.descuento) {
       const baseImponible = this.factura.subtotal - ((this.factura.subtotal / 100) * this.factura.descuento);
-      this.factura.baseImponible = parseFloat(baseImponible.toFixed(2));
+      this.factura.baseImponible =baseImponible.toFixed(2);
     } else {
-      this.factura.baseImponible = parseFloat(this.factura.subtotal.toFixed(2));
+      this.factura.baseImponible = parseFloat(this.factura.subtotal).toFixed(2);
     }
 
     this.ivaFactura();
@@ -201,7 +209,7 @@ export class FacturasCrearComponent {
   ivaFactura() {
     if (this.factura.ivaPorcentaje && this.factura.baseImponible) {
       const ivaDinero = ((this.factura.baseImponible / 100) * this.factura.ivaPorcentaje);
-      this.factura.ivaDinero = parseFloat(ivaDinero.toFixed(2));
+      this.factura.ivaDinero = ivaDinero.toFixed(2);
     } else {
       this.factura.ivaDinero = 0;
 
@@ -213,10 +221,10 @@ export class FacturasCrearComponent {
 
   totalFactura() {
     if (this.factura.baseImponible && this.factura.ivaDinero) {
-      const total = this.factura.baseImponible + this.factura.ivaDinero;
-      this.factura.total = parseFloat(total.toFixed(2));
+      const total = parseFloat(this.factura.baseImponible) + parseFloat(this.factura.ivaDinero);
+      this.factura.total = total.toFixed(2);
     } else {
-      this.factura.total = 0;
+      this.factura.total = 0.0.toFixed(2);
 
     }
   }

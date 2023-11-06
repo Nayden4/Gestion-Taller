@@ -38,7 +38,7 @@ return new class extends Migration
             $table->string('marca')->nullable();
             $table->string('modelo')->nullable();
             $table->string('km')->nullable();
-            $table->int('vehiculo_id')->nullable();
+            $table->integer('vehiculo_id')->nullable();
 
 
      

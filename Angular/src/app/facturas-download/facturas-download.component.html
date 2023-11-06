@@ -50,6 +50,10 @@
                         <th class="campos">Telefono:</th>
                         <td class="campos">933 49 12 89</td>
                     </tr>
+                    <tr>
+                        <th class="campos">IBAN:</th>
+                        <td>ES9321004270112200164777</td>
+                    </tr>
                 </table>
             </div>
             <div class="col-4 rounded border p-3">
@@ -71,7 +75,8 @@
                     </tr>
                     <tr>
                         <th class="campos">Telefono:</th>
-                        <td class="campos">{{cliente.telefono}}</td>
+                        <td class="campos">{{ cliente.telefono !== null ? cliente.telefono : '' }}
+                        </td>
                     </tr>
                 </table>
 
@@ -120,13 +125,13 @@
                 <tbody>
                     <tr *ngFor="let fila of filas; let i = index ">
                         <td>
-                            <input id="subtotal{{i}}" class="form-control" value="{{ this.filas[i].articulo}}" readonly>
+                            <input id="subtotal{{i}}" class="form-control articulo" value="{{ this.filas[i].articulo}}" readonly>
                         </td>
                         <td>
-                            <input id="subtotal{{i}}" class="form-control" value="{{ this.filas[i].unidades}}" readonly>
+                            <input id="unidades{{i}}" class="form-control unidades" value="{{ this.filas[i].unidades}}" readonly>
                         </td>
                         <td>
-                            <input id="subtotal{{i}}" class="form-control" value="{{ this.filas[i].precioUn}}" readonly>
+                            <input id="precioUn{{i}}" class="form-control" value="{{ this.filas[i].precioUn}}" readonly>
                         </td>
                         <td>
                             <input id="subtotal{{i}}" class="form-control" value="{{ this.filas[i].subtotal}}" readonly>
@@ -142,23 +147,23 @@
                         </div>
                     </tr>
                     <tr>
-                        <th class="borde-redondo bg-rojo">
+                        <th class="borde-redondo bg-rojo text-light">
                             Descuento %
                         </th>
-                        <th class="bg-rojo">
+                        <th class="bg-rojo text-light unidades">
                             <input id="descuento" value="{{this.factura.descuento}}"  class="form-control" readonly>
 
                         </th>
-                        <th class="bg-rojo">
+                        <th class="bg-rojo text-light">
                             Subtotal
                         </th>
-                        <th class="bg-rojo">
+                        <th class="bg-rojo text-light">
                             <input id="subtotalFac" class="form-control" value="{{this.factura.subtotal}}" readonly>
                         </th>
-                        <th class="bg-rojo">
+                        <th class="bg-rojo text-light">
                             Base Imponible
                         </th>
-                        <th class="bg-rojo borde-extra1">
+                        <th class="bg-rojo borde-extra1 text-light">
                             <input id="baseImponible" class="form-control" value="{{this.factura.baseImponible}}" readonly>
 
                         </th>
@@ -186,16 +191,16 @@
                         </td>
 
                     </tr>
-                    <tr>
+                    <tr class="final">
                         <th class="bordes"></th>
                         <th class="bordes"></th>
                         <th class="bordes"></th>
 
 
-                        <th class=" borde-redondo bg-rojo">
+                        <th class=" borde-redondo bg-rojo text-light">
                             TOTAL FACTURA
                         </th>
-                        <th class="bg-rojo">
+                        <th class=" bg-rojo text-light">
                             {{this.factura.total}} €
                         </th>
                         <th class="bg-rojo borde-extra2">

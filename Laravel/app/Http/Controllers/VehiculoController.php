@@ -14,10 +14,12 @@ class VehiculoController extends BaseController
 
     function getProximasItv()
     {
-        $vehiculos = Vehiculo::orderBy('proximaItv', 'asc')
-            ->take(3)
-            ->with('cliente')
-            ->get();
+        $vehiculos = Vehiculo::whereNotNull('proximaItv')
+        ->orderBy('proximaItv', 'asc')
+        ->take(3)
+        ->with('cliente')
+        ->get();
+    
 
         return $vehiculos;
     }

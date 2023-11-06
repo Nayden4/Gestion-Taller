@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.5;
     padding: 20px;
     margin-bottom: 50px;
@@ -14,11 +14,12 @@ body {
 
 
 .container {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
     background-color: #ffffff;
+    padding-top: 10px;
     padding: 20px;
-    border: 1px solid #000000;
+
 }
 
 .col-sm {
@@ -140,15 +141,15 @@ input {
 }
 
 .bg-rojo {
-    background-color: #ff0000d0;
+    /* background-color: #ff0000d0; */
 
-    /* background-color: rgba(255, 0, 0, 0.726) !important; */
+     background-color:red !important; 
     border-width: 0px !important;
 
 }
 
 .bg-negro {
-    background-color: rgba(0, 0, 0, 0.74) !important;
+      background-color: rgba(3, 3, 3, 0.74) !important;  
     border-width: 0px !important;
 }
 
@@ -229,3 +230,17 @@ table{
     margin-left: 45%;
     margin-bottom: 50px;
 }
+.articulo{
+    width: 400px;
+}
+.unidades{
+    width: 80px;
+}
+
+.final {
+    height: 80px;
+    text-align: center;
+    font-size: 22px;
+}
+
+

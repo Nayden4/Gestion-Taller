@@ -25,15 +25,17 @@ export class FacturasDownloadComponent {
   public openPDF(): void {
     let DATA: any = document.getElementById('htmlData');
     html2canvas(DATA).then((canvas) => {
-      let fileWidth = 230;
+      let fileWidth = 190; // Ancho del contenido
       let fileHeight = (canvas.height * fileWidth) / canvas.width;
       const FILEURI = canvas.toDataURL('image/png');
       let PDF = new jsPDF('p', 'mm', 'a4');
-      let position = 0;
-      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      PDF.save('angular-demo.pdf');
+      let position = 25; // Margen superior en mm
+      PDF.addImage(FILEURI, 'PNG', 10, position, fileWidth, fileHeight,undefined,"FAST");
+      PDF.save(this.cliente.nombre + '_' + this.cliente.apellidos + '_' + this.factura.numero + '.pdf');
     });
   }
+  
+  
 
   
 
@@ -73,11 +75,11 @@ export class FacturasDownloadComponent {
       //factura
       this.factura.fecha = data.data;
       this.factura.numero = data.numero;
-      this.factura.total = data.totalConIva
-      this.factura.baseImponible = data.total;
+      this.factura.total = data.totalConIva.toFixed(2);
+      this.factura.baseImponible = data.total.toFixed(2);
       this.factura.descuento = data.descuento;
       this.factura.ivaDinero = (data.totalConIva - data.total).toFixed(2);
-      this.factura.subtotal = data.subtotal;
+      this.factura.subtotal = data.subtotal.toFixed(2);
       this.factura.ivaPorcentaje = data.ivaPorcentaje;
 
 
@@ -108,10 +110,10 @@ export class FacturasDownloadComponent {
         data.forEach((cont) => {
           this.filas.push({
             articulo: cont.nombre,
-            unidades: cont.unidades,
-            precioUn: cont.precioUn,
-            subtotal: cont.precioSinIva,
-            totalConIva: cont.precioConIva
+            unidades: parseFloat(cont.unidades).toFixed(2),
+            precioUn: parseFloat(cont.precioUn).toFixed(2),
+            subtotal: parseFloat(cont.precioSinIva).toFixed(2),
+            totalConIva: parseFloat(cont.precioConIva).toFixed(2)
           });
         });
       } console.log(this.filas);
