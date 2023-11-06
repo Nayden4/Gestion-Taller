@@ -44,15 +44,12 @@ Este proyecto es una aplicación web para la gestión de facturas, clientes y ve
 
 ## Capturas
 
-![Texto alternativo de la imagen](https://github.com/Nayden4/Gestion-Taller/assets/113701583/8b071734-cdbe-41f9-a344-1688206562b6)
+![Screenshot from 2023-11-06 20-44-12](https://github.com/Nayden4/Gestion-Taller/assets/113701583/4cf5fb75-b7aa-4480-9928-e66004e18e61)
+![Screenshot from 2023-11-06 20-44-30](https://github.com/Nayden4/Gestion-Taller/assets/113701583/29e854e0-69ce-497c-82c8-2204c43d1460)
+![Screenshot from 2023-11-06 20-44-59](https://github.com/Nayden4/Gestion-Taller/assets/113701583/5b717267-1129-4ec7-b38c-b4baf16f707d)
+![Screenshot from 2023-11-06 20-45-09](https://github.com/Nayden4/Gestion-Taller/assets/113701583/acdff4d9-20e1-4a0c-9998-84b1b59f951f)
+![Screenshot from 2023-11-06 20-45-22](https://github.com/Nayden4/Gestion-Taller/assets/113701583/69fc7928-4640-4985-b76c-490f2b48c6de)
 
-![Texto alternativo de la imagen](https://github.com/Nayden4/Gestion-Taller/assets/113701583/a4e7cf10-6a91-4100-9061-3334063a2534)
-
-![Texto alternativo de la imagen](https://github.com/Nayden4/Gestion-Taller/assets/113701583/fbf0e533-e63f-4a1a-b4e3-4634030dd489)
-
-![Texto alternativo de la imagen](https://github.com/Nayden4/Gestion-Taller/assets/113701583/5464d71d-68e4-41a7-97f3-8f0e06c086bc)
-
-![Texto alternativo de la imagen](https://github.com/Nayden4/Gestion-Taller/assets/113701583/a8375367-fd11-41a4-a377-dc362c18adb1)
 
 
 
