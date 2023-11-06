@@ -4,7 +4,7 @@ Este proyecto es una aplicación web para la gestión de facturas, clientes y ve
 
 ## Características
 
-- Gestión de facturas: Creación, edición, y visualización de facturas.
+- Gestión de facturas: Creación, edición, descarga y visualización de facturas.
 - Gestión de clientes: Registro, edición y detalles de clientes.
 - Gestión de vehículos: Registro, edición y detalles de vehículos.
 
