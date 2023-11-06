@@ -44,11 +44,18 @@ Este proyecto es una aplicación web para la gestión de facturas, clientes y ve
 
 ## Capturas
 
+### Pagina principal
 ![image](https://github.com/Nayden4/Gestion-Taller/assets/113701583/50c2a9df-5d6a-4eba-aeb0-f2bbd91c4dbb)
-![Screenshot from 2023-11-06 20-44-30](https://github.com/Nayden4/Gestion-Taller/assets/113701583/29e854e0-69ce-497c-82c8-2204c43d1460)
-![Screenshot from 2023-11-06 20-44-59](https://github.com/Nayden4/Gestion-Taller/assets/113701583/5b717267-1129-4ec7-b38c-b4baf16f707d)
-![Screenshot from 2023-11-06 20-45-09](https://github.com/Nayden4/Gestion-Taller/assets/113701583/acdff4d9-20e1-4a0c-9998-84b1b59f951f)
-![Screenshot from 2023-11-06 20-45-22](https://github.com/Nayden4/Gestion-Taller/assets/113701583/69fc7928-4640-4985-b76c-490f2b48c6de)
+
+### Creación facturas
+![image](https://github.com/Nayden4/Gestion-Taller/assets/113701583/29e854e0-69ce-497c-82c8-2204c43d1460)
+![image](https://github.com/Nayden4/Gestion-Taller/assets/113701583/5b717267-1129-4ec7-b38c-b4baf16f707d)
+
+### Lista facturas
+![image](https://github.com/Nayden4/Gestion-Taller/assets/113701583/acdff4d9-20e1-4a0c-9998-84b1b59f951f)
+
+### Creación Clientes
+![image](https://github.com/Nayden4/Gestion-Taller/assets/113701583/69fc7928-4640-4985-b76c-490f2b48c6de)
 
 
 
